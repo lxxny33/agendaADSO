@@ -11,9 +11,6 @@ console.log("==================")
 console.log("SISTEMA DE NOTAS SENA");
 console.log("==================");
 console.log("Aprendiz" + nombre_completo);  
-
-
-
 console.log("Ficha " + ficha);
 console.log("Notas " + notas);
 console.log("==================");
