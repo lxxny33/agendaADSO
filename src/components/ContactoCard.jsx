@@ -1,31 +1,29 @@
+export default function ContactoCard({ nombre, telefono, correo, etiqueta, onEliminar }) { 
 
-export default function ContactoCard({
-  id,
-  nombre,
-  telefono,
-  correo,
-  etiqueta,
-  onDelete,
-}) {
-  return (
-    <div className="card-contacto">
-      <h3 className="card-nombre">{nombre}</h3>
+  return ( 
 
-      <p className="card-linea">📞 {telefono}</p>
+    <article className="tarjeta-contacto"> 
 
-      <p className="card-linea">📧 {correo}</p>
+      <h3>{nombre}</h3> 
 
-      {etiqueta && (
-        <p className="card-etiqueta">{etiqueta}</p>
-      )}
+      <p>📞 {telefono}</p> 
 
-      <button
-        className="btn-eliminar"
-        onClick={() => onDelete(id)}
-      >
-        Eliminar
-      </button>
-    </div>
-  );
-}
+      <p>✉️ {correo}</p> 
 
+      {etiqueta && <p>{etiqueta}</p>} 
+
+      <div className="acciones"> 
+
+        <button className="btn-eliminar" onClick={() => onEliminar(correo)}> 
+
+          Eliminar 
+
+        </button> 
+
+      </div> 
+
+    </article> 
+
+  ); 
+
+} 
