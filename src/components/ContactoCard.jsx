@@ -1,3 +1,4 @@
+
 export default function ContactoCard({
   id,
   nombre,
@@ -27,3 +28,4 @@ export default function ContactoCard({
     </div>
   );
 }
+
