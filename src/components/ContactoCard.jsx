@@ -1,29 +1,51 @@
-export default function ContactoCard({ nombre, telefono, correo, etiqueta, onEliminar }) { 
+// src/components/ContactoCard.jsx
 
-  return ( 
+export default function ContactoCard({
+  nombre,
+  telefono,
+  correo,
+  empresa,
+  etiqueta,
+  onEliminar
+}) {
+  return (
+    <article className="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
+      {/* Nombre destacado */}
+      <h3 className="text-xl font-bold text-gray-900 mb-3">
+        {nombre}
+      </h3>
 
-    <article className="tarjeta-contacto"> 
+      {/* Teléfono */}
+      <p className="text-gray-700 mb-1">
+        <strong>Teléfono:</strong> {telefono}
+      </p>
 
-      <h3>{nombre}</h3> 
+      {/* Correo */}
+      <p className="text-gray-700 mb-1">
+        <strong>Correo:</strong> {correo}
+      </p>
 
-      <p>📞 {telefono}</p> 
+      {/* Empresa */}
+      {empresa && (
+        <p className="text-sm text-gray-600 mb-1">
+          <strong>Empresa:</strong> {empresa}
+        </p>
+      )}
 
-      <p>✉️ {correo}</p> 
+      {/* Etiqueta */}
+      <p className="text-gray-700 mb-4">
+        <strong>Etiqueta:</strong> {etiqueta}
+      </p>
 
-      {etiqueta && <p>{etiqueta}</p>} 
-
-      <div className="acciones"> 
-
-        <button className="btn-eliminar" onClick={() => onEliminar(correo)}> 
-
-          Eliminar 
-
-        </button> 
-
-      </div> 
-
-    </article> 
-
-  ); 
-
-} 
+      {/* Acción eliminar */}
+      <div className="flex justify-start">
+        <button
+          onClick={() => onEliminar(correo)}
+          className="bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+        >
+          Eliminar
+        </button>
+      </div>
+    </article>
+  );
+}
