@@ -1,51 +1,41 @@
-// src/components/ContactoCard.jsx
-
 export default function ContactoCard({
+  id,
   nombre,
   telefono,
   correo,
-  empresa,
   etiqueta,
   onEliminar
 }) {
   return (
-    <article className="bg-white border border-gray-200 rounded-xl shadow-sm p-5">
-      {/* Nombre destacado */}
-      <h3 className="text-xl font-bold text-gray-900 mb-3">
-        {nombre}
-      </h3>
+    <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="text-xl font-bold text-gray-800">
+            {nombre}
+          </h3>
 
-      {/* Teléfono */}
-      <p className="text-gray-700 mb-1">
-        <strong>Teléfono:</strong> {telefono}
-      </p>
+          <span className="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm mt-2">
+            {etiqueta}
+          </span>
+        </div>
 
-      {/* Correo */}
-      <p className="text-gray-700 mb-1">
-        <strong>Correo:</strong> {correo}
-      </p>
-
-      {/* Empresa */}
-      {empresa && (
-        <p className="text-sm text-gray-600 mb-1">
-          <strong>Empresa:</strong> {empresa}
-        </p>
-      )}
-
-      {/* Etiqueta */}
-      <p className="text-gray-700 mb-4">
-        <strong>Etiqueta:</strong> {etiqueta}
-      </p>
-
-      {/* Acción eliminar */}
-      <div className="flex justify-start">
         <button
-          onClick={() => onEliminar(correo)}
-          className="bg-red-500 hover:bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+          onClick={onEliminar}
+          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl"
         >
           Eliminar
         </button>
       </div>
-    </article>
+
+      <div className="mt-4 space-y-2">
+        <p className="text-gray-600">
+          <strong>Teléfono:</strong> {telefono}
+        </p>
+
+        <p className="text-gray-600">
+          <strong>Correo:</strong> {correo}
+        </p>
+      </div>
+    </div>
   );
 }
