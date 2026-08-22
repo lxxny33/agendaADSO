@@ -8,11 +8,11 @@
       "etiqueta": "profe"
     },
     {
-      "nombre": "Luis",
-      "telefono": "30000000",
-      "correo": "luis@gmail.com",
-      "etiqueta": "Analista",
-      "id": "Q4EWMrmhg6I"
+      "id": "2",
+      "nombre": "Ana García",
+      "telefono": "3001234567",
+      "correo": "ana@gmail.com",
+      "etiqueta": "estudiante"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

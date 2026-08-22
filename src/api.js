@@ -1,5 +1,6 @@
 const API = "http://localhost:3002/contactos";
 
+// GET - Listar contactos
 export async function listarContactos() {
   const res = await fetch(API);
 
@@ -10,6 +11,7 @@ export async function listarContactos() {
   return res.json();
 }
 
+// POST - Crear contacto
 export async function crearContacto(data) {
   const res = await fetch(API, {
     method: "POST",
@@ -26,6 +28,7 @@ export async function crearContacto(data) {
   return res.json();
 }
 
+// DELETE - Eliminar contacto
 export async function eliminarContactoPorId(id) {
   const res = await fetch(`${API}/${id}`, {
     method: "DELETE"
