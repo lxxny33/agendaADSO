@@ -13,6 +13,13 @@
       "telefono": "3001234567",
       "correo": "ana@gmail.com",
       "etiqueta": "estudiante"
+    },
+    {
+      "nombre": "Carlos perez",
+      "telefono": "3215551234",
+      "correo": "carlos@gmail.com",
+      "etiqueta": "analista",
+      "id": "KHvEkmXiJoU"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
