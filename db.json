@@ -20,6 +20,13 @@
       "correo": "carlos@gmail.com",
       "etiqueta": "analista",
       "id": "KHvEkmXiJoU"
+    },
+    {
+      "nombre": "Juan perez",
+      "telefono": "3001234567",
+      "correo": "Juan@gmail.com",
+      "etiqueta": "amigo",
+      "id": "MESMfIlaYwI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -1,24 +1,14 @@
-// Archivo: src/App.jsx 
-
 import { useEffect, useState } from "react"; 
-
-import { 
-  listarContactos, 
-  crearContacto, 
-  eliminarContactoPorId, 
-} from "./api"; 
-
+import { listarContactos, crearContacto, eliminarContactoPorId, actualizarContacto } from "./api";
 import { APP_INFO } from "./config"; 
-
-import FormularioContacto from "./components/FormularioContacto"; 
-import ContactoCard from "./components/ContactoCard"; 
+import FormularioContacto from "./components/FormularioContacto";
+import ContactoCard from "./components/ContactoCard"
 
 function App() { 
   const [contactos, setContactos] = useState([]); 
   const [cargando, setCargando] = useState(true); 
   const [error, setError] = useState(""); 
 
-  // Nuevos estados para búsqueda y ordenamiento (Clase 10)
   const [busqueda, setBusqueda] = useState("");
   const [ordenAsc, setOrdenAsc] = useState(true);
 
@@ -69,6 +59,19 @@ function App() {
     } 
   }; 
 
+  const onActualizarContacto = async (id, datosActualizados) => {
+    try {
+      setError("");
+      const actualizado = await actualizarContacto(id, datosActualizados);
+      setContactos((prev) =>
+        prev.map((c) => (c.id === id ? actualizado : c))
+      );
+    } catch (error) {
+      console.error("Error al actualizar contacto:", error);
+      setError("No se pudo actualizar el contacto. Intenta de nuevo.");
+    }
+  };
+
   const contactosFiltrados = contactos.filter((c) => {
     const termino = busqueda.toLowerCase();
     const nombre = c.nombre.toLowerCase();
@@ -81,7 +84,7 @@ function App() {
       correo.includes(termino) ||
       etiqueta.includes(termino) ||
       telefono.includes(termino)
-    );
+    );   
   });
 
   const contactosOrdenados = [...contactosFiltrados].sort((a, b) => {
@@ -97,13 +100,13 @@ function App() {
       <div className="max-w-4xl mx-auto px-4 py-8"> 
         <header className="mb-8"> 
           <p className="text-xs tracking-[0.3em] text-gray-500 uppercase"> 
-            Desarrollo Web ReactJS Ficha {APP_INFO.ficha}[cite: 4, 5]
+            Desarrollo Web ReactJS Ficha {APP_INFO.ficha}
           </p> 
           <h1 className="text-4xl font-extrabold text-gray-900 mt-2"> 
-            Agenda ADSO v8[cite: 1, 4, 5]
+            Agenda ADSO v8
           </h1> 
           <p className="text-sm text-gray-600 mt-1"> 
-            {APP_INFO.subtitulo}[cite: 4, 5]
+            {APP_INFO.subtitulo}
           </p> 
         </header> 
 
@@ -119,7 +122,7 @@ function App() {
           <> 
             <FormularioContacto onAgregar={onAgregarContacto} /> 
 
-            {/* Bloque de Búsqueda y Ordenamiento (Clase 10)[cite: 1] */}
+            {/* Bloque de Búsqueda y Ordenamiento */}
             <div className="bg-white shadow-sm rounded-2xl p-6 mb-6 space-y-4">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <input
@@ -138,7 +141,7 @@ function App() {
                 </button>
               </div>
 
-              {/* Contador dinámico de resultados (Mini Reto 2)[cite: 1] */}
+              {/* Contador dinámico de resultados */}
               <p className="text-xs text-gray-500 font-medium">
                 Mostrando {contactosOrdenados.length} {contactosOrdenados.length === 1 ? "contacto" : "contactos"}
               </p>
@@ -147,17 +150,19 @@ function App() {
             <section className="space-y-4"> 
               {contactosOrdenados.length === 0 ? ( 
                 <p className="text-sm text-gray-500"> 
-                  No se encontraron contactos que coincidan con la búsqueda.[cite: 1]
+                  No se encontraron contactos que coincidan con la búsqueda.
                 </p> 
               ) : ( 
                 contactosOrdenados.map((c) => ( 
                   <ContactoCard 
                     key={c.id} 
+                    id={c.id}
                     nombre={c.nombre} 
                     telefono={c.telefono} 
                     correo={c.correo} 
                     etiqueta={c.etiqueta} 
                     onEliminar={() => onEliminarContacto(c.id)} 
+                    onActualizar={onActualizarContacto}
                   /> 
                 )) 
               )} 
@@ -167,7 +172,7 @@ function App() {
 
         <footer className="mt-8 text-xs text-gray-400"> 
           <p>Desarrollo Web – ReactJS | Proyecto Agenda ADSO</p> 
-          <p>Instructor: Gustavo Adolfo Bolaños Dorado[cite: 4]</p> 
+          <p>Instructor: Gustavo Adolfo Bolaños Dorado</p> 
         </footer> 
       </div> 
     </div> 

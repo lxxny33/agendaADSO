@@ -1,51 +1,51 @@
-// Archivo: src/api.js 
+// Importamos la URL base desde config.js
+import { API_BASE_URL } from "./config";
 
-// Capa de acceso a datos de Agenda ADSO (llamados a la API REST). 
-// Importamos la URL base desde config.js 
+// Función GET: listar contactos
+export async function listarContactos() {
+  // Hacemos un GET a la URL base (lista de contactos)
+  const res = await fetch(API_BASE_URL);
 
-import { API_BASE_URL } from "./config"; 
-// Función GET: listar contactos 
+  // Si la respuesta no es correcta (código 4xx o 5xx), lanzamos un error
+  if (!res.ok) throw new Error("Error al listar contactos");
 
-export async function listarContactos() { 
+  // Parseamos el JSON y lo retornamos (devuelve un array de contactos)
+  return res.json();
+}
 
-  // Hacemos un GET a la URL base (lista de contactos) 
-  const res = await fetch(API_BASE_URL); 
+// Función POST: crear un nuevo contacto
+export async function crearContacto(data) {
+  // Hacemos un POST a la URL base con el objeto recibido
+  const res = await fetch(API_BASE_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" }, // Indicamos que el body es JSON
+    body: JSON.stringify(data), // Convertimos el objeto JavaScript a JSON
+  });
 
-  // Si la respuesta no es correcta (código 4xx o 5xx), lanzamos un error 
+  // Validamos la respuesta
+  if (!res.ok) throw new Error("Error al crear el contacto");
 
-  if (!res.ok) throw new Error("Error al listar contactos"); 
-  // Parseamos el JSON y lo retornamos (devuelve un array de contactos) 
-  return res.json(); 
-} 
-// Función POST: crear un nuevo contacto 
+  // Devolvemos el contacto creado que regresa la API (incluye el id)
+  return res.json();
+}
 
-export async function crearContacto(data) { 
+// Función DELETE: eliminar contacto por id
+export async function eliminarContactoPorId(id) {
+  // Hacemos un DELETE a /contactos/:id usando la URL base
+  const res = await fetch(`${API_BASE_URL}/${id}`, { method: "DELETE" });
 
-  // Hacemos un POST a la URL base con el objeto recibido 
+  // Validamos la respuesta
+  if (!res.ok) throw new Error("Error al eliminar el contacto");
 
-  const res = await fetch(API_BASE_URL, { 
+  return true;
+}
 
-    method: "POST", 
-
-    headers: { "Content-Type": "application/json" }, // Indicamos que el body es JSON 
-
-    body: JSON.stringify(data), // Convertimos el objeto JavaScript a JSON 
-
-  }); 
-  // Validamos la respuesta 
-  if (!res.ok) throw new Error("Error al crear el contacto"); 
-  // Devolvemos el contacto creado que regresa la API (incluye el id) 
-  return res.json(); 
-} 
-// Función DELETE: eliminar contacto por id 
-
-export async function eliminarContactoPorId(id) { 
-  // Hacemos un DELETE a /contactos/:id usando la URL base 
-  const res = await fetch(`${API_BASE_URL}/${id}`, { method: "DELETE" }); 
-  // Validamos la respuesta 
-
-  if (!res.ok) throw new Error("Error al eliminar el contacto"); 
-  // Devolvemos true indicando éxito  
-  return true; 
-
+export async function actualizarContacto(id, data) {
+  const res = await fetch(`${API_BASE_URL}/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error("Error al actualizar el contacto");
+  return res.json(); // Devuelve el contacto actualizado
 }

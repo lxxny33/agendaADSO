@@ -60,37 +60,37 @@ export default function FormularioContacto({ onAgregar }) {
   }
 
   const onSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const esValido = validarFormulario();
+    const esValido = validarFormulario();
 
-  if (!esValido) {
-    return;
-  }
+    if (!esValido) {
+      return;
+    }
 
-  try {
-    setEnviando(true);
+    try {
+      setEnviando(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+      await onAgregar(form);
 
-    await onAgregar(form);
+      setForm({
+        nombre: "",
+        telefono: "",
+        correo: "",
+        etiqueta: ""
+      });
 
-    setForm({
-      nombre: "",
-      telefono: "",
-      correo: "",
-      etiqueta: ""
-    });
-
-    setErrores({
-      nombre: "",
-      telefono: "",
-      correo: ""
-    });
-  } finally {
-    setEnviando(false);
-  }
-};
+      setErrores({
+        nombre: "",
+        telefono: "",
+        correo: ""
+      });
+    } catch (error) {
+      console.error("Error al guardar contacto:", error);
+    } finally {
+      setEnviando(false);
+    }
+  };
 
   return (
     <form
