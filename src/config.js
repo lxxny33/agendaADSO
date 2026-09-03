@@ -18,7 +18,7 @@ export const APP_INFO = {
 
   // Número de ficha que se muestra en el encabezado 
 
-  ficha: "3223876", 
+  ficha: "3412785", 
 
   // Título principal de la aplicación 
 
