@@ -8,7 +8,7 @@
 
 // Si cambia el puerto o la ruta, solo se modifica aquí. 
 
-export const API_BASE_URL = "http://localhost:3002/contactos"; 
+export const API_BASE_URL = "https://agendaadso-api-0iw7.onrender.com/contactos"; 
 
  
 
